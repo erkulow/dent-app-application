@@ -7,7 +7,13 @@ const InputMaskNumber = (props) => {
 	const country = ['kg', 'ru', 'kz']
 
 	return (
-		<div>
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '3px',
+			}}
+		>
 			<StyledLable htmlFor={props.label}>{props.label}</StyledLable>
 			<InputStyled
 				country={'kg'}
@@ -29,10 +35,10 @@ const InputMaskNumber = (props) => {
 	)
 }
 const StyledLable = styled.label`
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Source Sans Pro';
 	font-size: 14px;
 	font-weight: 400;
-	color: #ffffff;
+	color: #5790ff;
 `
 const InputStyled = styled(PhoneInput)`
 	width: 100%;
@@ -50,15 +56,15 @@ const InputStyled = styled(PhoneInput)`
 	transition: 0.2s;
 	background-color: ${({ background }) => background || '#ffffff'};
 	border: ${({ validation }) =>
-		validation ? '1px solid red' : '1px solid #ced4da'};
+		validation ? '1px solid red' : '1px solid #5790ff'};
 	::placeholder {
 		color: #d0d2d3;
 	}
 	:active {
-		border: 1px solid rgba(31, 88, 174, 0.6);
+		border: 1px solid #5790ff;
 	}
 	:focus {
-		border: 1px solid rgba(31, 88, 174, 0.6);
+		border: 1px solid #5790ff;
 	}
 	:disabled,
 	:disabled:hover {

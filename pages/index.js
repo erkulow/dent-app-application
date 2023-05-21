@@ -6,6 +6,7 @@ import Image from 'next/image'
 import RecepIMG from '../public/assets/recep.svg'
 import Circle1 from '../public/assets/Circle1.svg'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function Home() {
 	const headContext = {
@@ -28,6 +29,11 @@ export default function Home() {
 			},
 		],
 	}
+
+	const [openForm, setopeForm] = useState(false)
+
+	console.log(openForm)
+
 	return (
 		<MainLayout headContext={headContext}>
 			<BackgroundWrapper>
@@ -47,7 +53,15 @@ export default function Home() {
 					единицах измерения, но и построить общую картину – что и
 					когда выбирать.
 				</Description>
-				<OpenButton>Заполнить форму</OpenButton>
+				<WrapperForm openForm={openForm}>
+					{openForm ? (
+						<Form setopeForm={setopeForm} />
+					) : (
+						<OpenButton onClick={() => setopeForm(!openForm)}>
+							Заполнить форму
+						</OpenButton>
+					)}
+				</WrapperForm>
 				<motion.div
 					whileHover={{ scale: 1.2 }}
 					whileTap={{ scale: 1.1 }}
@@ -55,9 +69,6 @@ export default function Home() {
 					dragConstraints={{ left: -100, right: 100 }}
 				/>
 			</BackgroundWrapper>
-			{/* <main>
-				<Form />
-			</main> */}
 		</MainLayout>
 	)
 }
@@ -73,13 +84,28 @@ const BackgroundWrapper = styled.div`
 	justify-content: space-between;
 	position: relative;
 `
+
+const WrapperForm = styled.main`
+	position: fixed;
+	bottom: -2px;
+	width: 100%;
+	height: ${({ openForm }) => (openForm ? '85vh' : '50px')};
+	/* background-color: #5790ff; */
+	background-color: #ffffff;
+
+	border-top-left-radius: ${({ openForm }) => (openForm ? '30px' : '30px')};
+	border-top-right-radius: ${({ openForm }) => (openForm ? '30px' : '30px')};
+	display: flex;
+	align-items: flex-start;
+	transition: 1.5s ease;
+`
 const TopRadius = styled.div`
 	position: absolute;
 	width: 100%;
 	height: 40px;
 	background-color: #5790ff;
-	border-bottom-left-radius: 50%;
-	border-bottom-right-radius: 50%;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
 `
 
 const WrapperIMG = styled.div`
@@ -131,16 +157,11 @@ const Description = styled.p`
 	margin-top: 10px;
 `
 const OpenButton = styled.button`
-	position: fixed;
-	bottom: -2px;
-	width: 100%;
-	height: 50px;
 	background-color: #5790ff;
-	border-top-left-radius: 60%;
-	border-top-right-radius: 60%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	height: 100%;
+	width: 100%;
 	border: none;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-style: normal;

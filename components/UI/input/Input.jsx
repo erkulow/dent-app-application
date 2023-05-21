@@ -2,6 +2,31 @@ import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
 const Input = forwardRef((props, ref) => {
+	if (props.type === 'select') {
+		return (
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					gap: '3px',
+				}}
+			>
+				<StyledLable htmlFor={props.label}>{props.label}</StyledLable>
+				<InputStyledSelect ref={ref} {...props}>
+					<option defaultValue>-</option>
+					{props?.options?.map((option) => (
+						<option
+							key={option.path}
+							value={option.path == null ? '' : option.path}
+							style={{ color: 'black', background: 'white' }}
+						>
+							{option.label}
+						</option>
+					))}
+				</InputStyledSelect>
+			</div>
+		)
+	}
 	return (
 		<WrapperInput>
 			<StyledLable htmlFor={props.label}>{props.label}</StyledLable>
@@ -25,14 +50,14 @@ const WrapperInput = styled.div`
 	width: 100% !important;
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	gap: 3px;
 `
 
 const StyledLable = styled.label`
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Source Sans Pro';
 	font-size: 14px;
 	font-weight: 400;
-	color: #ffffff;
+	color: #5790ff;
 `
 
 const InputStyled = styled.input`
@@ -46,6 +71,7 @@ const InputStyled = styled.input`
 	font-size: 16px;
 	font-weight: 400;
 	outline: none;
+	font-family: 'Source Sans Pro';
 	transition: 0.2s;
 	background-color: ${({ background }) => background || '#ffffff'};
 	border: ${({ border }) => border || '1px solid #5790ff'};
@@ -56,11 +82,11 @@ const InputStyled = styled.input`
 		border: ${({ active }) =>
 			active ? '1px solid #5790ff !important' : ''};
 	}
-	:focus {
+	/* :focus {
 		-webkit-box-shadow: 0px 0px 1px 1px #5790ff;
 		-moz-box-shadow: 0px 0px 1px 1px #5790ff;
 		box-shadow: 0px 0px 1px 1px #5790ff;
-	}
+	} */
 	:disabled,
 	:disabled:hover {
 		opacity: ${({ notDisabled }) => (notDisabled ? '1' : '0.5')};
@@ -71,6 +97,39 @@ const InputStyled = styled.input`
 	&[type='number']::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
+	}
+`
+const InputStyledSelect = styled.select`
+	width: ${({ width }) => width || '100%'};
+	padding: 0.7em 0.8em;
+	border-radius: 7px;
+	letter-spacing: 0.6px;
+	color: grey;
+	font-weight: bold;
+	font-family: 'Source Sans Pro';
+	font-size: 16px;
+	font-weight: 400;
+	outline: none;
+	transition: 0.2s;
+	background-color: #ffffff;
+	border: 1px solid #5790ff;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	::placeholder {
+		color: #d0d2d3;
+	}
+	:active {
+		border: 1px solid #5790ff;
+	}
+	:focus {
+		border: 1px solid #5790ff;
+	}
+	:disabled,
+	:disabled:hover {
+		opacity: 0.5;
+		cursor: not-allowed;
 	}
 `
 export default Input
