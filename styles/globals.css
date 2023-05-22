@@ -7,3 +7,6 @@
 	box-sizing: border-box;
 	outline: none;
 }
+body::-webkit-scrollbar {
+	display: none;
+}

@@ -24,6 +24,7 @@ const InputMaskNumber = (props) => {
 					border: 'none',
 					width: '100%',
 					height: '30px',
+					color: '#5790ff',
 				}}
 				defaultMask={'kg'}
 				buttonStyle={{
@@ -48,7 +49,7 @@ const InputStyled = styled(PhoneInput)`
 	padding: ${({ padding }) => padding || '5px'};
 	border-radius: ${({ borderRadius }) => borderRadius || '5px'};
 	letter-spacing: 0.6px;
-	color: grey;
+	color: #5790ff !important;
 	font-weight: bold;
 	font-size: 16px;
 	font-weight: 400;

@@ -66,7 +66,7 @@ const InputStyled = styled.input`
 	padding: ${({ padding }) => padding || '10px'};
 	border-radius: ${({ borderRadius }) => borderRadius || '5px'};
 	letter-spacing: 0.6px;
-	color: black;
+	color: #5790ff;
 	font-weight: bold;
 	font-size: 16px;
 	font-weight: 400;
@@ -104,7 +104,7 @@ const InputStyledSelect = styled.select`
 	padding: 0.7em 0.8em;
 	border-radius: 7px;
 	letter-spacing: 0.6px;
-	color: grey;
+	color: #5790ff;
 	font-weight: bold;
 	font-family: 'Source Sans Pro';
 	font-size: 16px;

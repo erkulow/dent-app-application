@@ -32,6 +32,7 @@ const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	background-color: #f6ebe5;
+	position: relative;
 `
 
 export default MainLayout

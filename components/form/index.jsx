@@ -6,10 +6,11 @@ import DownArrow from '../../public/assets/down.svg'
 import Image from 'next/image'
 import Button from '../UI/button'
 
-export const Form = ({ setopeForm }) => {
+export const Form = ({ setopenForm }) => {
 	const [name, setName] = useState('')
 	const [number, setNumber] = useState('')
 	const [doctor, setDoctor] = useState('')
+	const [cheduleTime, setCheduleTime] = useState('')
 
 	const handleNameChange = (value) => {
 		setName(value)
@@ -18,13 +19,56 @@ export const Form = ({ setopeForm }) => {
 	const handleNumberChange = (value) => {
 		setNumber(value)
 	}
+	const setCheduleTimeHandler = (value) => {
+		setCheduleTime(value)
+	}
+
+	const sendFormHandler = () => {
+		console.log({
+			name: name,
+			number: number,
+			doctor: doctor,
+			cheduleTime: cheduleTime,
+		})
+	}
+
+	const closeFormHandler = () => {
+		setopenForm(false)
+		setName('')
+		setNumber('')
+		setDoctor('')
+		setCheduleTime('')
+	}
 
 	const doctors = [
-		{ path: 'NOT_CONFIRMED', label: 'Не подтверждена' },
-		{ path: 'CONFIRMED', label: 'Подтвержден' },
-		{ path: 'COMEIN', label: 'Пришел' },
-		{ path: 'NOT_COME', label: 'Не пришел' },
-		{ path: 'CANCELED', label: 'Отменен' },
+		{ path: '1', label: 'Абу Мелисов' },
+		{ path: '2', label: 'Бейбарс Эркулов' },
+		{ path: '3', label: 'Нурс Исков' },
+		{ path: '4', label: 'Рахим Миллион' },
+		{ path: '5', label: 'Тимур Капалов' },
+	]
+
+	const dataTime = [
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
 	]
 	return (
 		<AppForm>
@@ -48,9 +92,48 @@ export const Form = ({ setopeForm }) => {
 					value={doctor}
 					onChange={(e) => setDoctor(e.target.value)}
 				/>
-				<Button>Записаться</Button>
+				{cheduleTime.length === 0 ? (
+					doctor !== '' ? (
+						doctor === '-' ? (
+							<StyledErrorMessage>
+								Выберите Доктора
+							</StyledErrorMessage>
+						) : (
+							<StyledErrorMessage>
+								У врача нет доступного времени в этот день
+							</StyledErrorMessage>
+						)
+					) : (
+						<StyledErrorMessage>
+							Выберите Доктора
+						</StyledErrorMessage>
+					)
+				) : (
+					<StyledSchedule>
+						{dataTime?.map((item) => (
+							<Shulde
+								key={item.startTime}
+								style={{
+									backgroundColor:
+										dataTime === item.startTime &&
+										'#06b5d4',
+									color:
+										dataTime === item.startTime && 'white',
+								}}
+								onClick={(e) =>
+									setCheduleTimeHandler(e.target.textContent)
+								}
+							>
+								<>{item.startTime}</>
+								<> - </>
+								<>{item.endTime}</>
+							</Shulde>
+						))}
+					</StyledSchedule>
+				)}
+				<Button onClick={() => sendFormHandler()}>Записаться</Button>
 			</WrapperForm>
-			<WrapperArrow onClick={() => setopeForm(false)}>
+			<WrapperArrow onClick={() => closeFormHandler(false)}>
 				<Image src={DownArrow} alt='Down' />
 			</WrapperArrow>
 		</AppForm>
@@ -93,4 +176,43 @@ const WrapperArrow = styled.div`
 	right: 50%;
 	left: 50%;
 	transform: translate(-50%, 50%);
+`
+const StyledSchedule = styled.div`
+	margin-top: 10px;
+	height: 100%;
+	width: 100%;
+	max-width: 600px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+`
+const Shulde = styled.div`
+	width: 90px;
+	height: 30px;
+	border: none;
+	font-family: 'Source Sans Pro';
+	font-size: 13px;
+	background-color: #d8f0fc;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 6px;
+	cursor: pointer;
+	&:active {
+		background-color: #06b5d4 !important;
+		color: #ffffff;
+	}
+`
+const StyledErrorMessage = styled.div`
+	font-family: 'Source Sans Pro';
+	width: 100%;
+	height: 50px;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	line-height: 24px;
+	background-color: #fff3cd;
 `

@@ -4,7 +4,9 @@ import MainLayout from '../layouts/main-layout'
 import { styled } from 'styled-components'
 import Image from 'next/image'
 import RecepIMG from '../public/assets/recep.svg'
-import Circle1 from '../public/assets/Circle1.svg'
+import Circle1 from '../public/assets/circle1.svg'
+import Circle2 from '../public/assets/circle2.svg'
+
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -30,9 +32,7 @@ export default function Home() {
 		],
 	}
 
-	const [openForm, setopeForm] = useState(false)
-
-	console.log(openForm)
+	const [openForm, setopenForm] = useState(false)
 
 	return (
 		<MainLayout headContext={headContext}>
@@ -41,9 +41,9 @@ export default function Home() {
 				<WrapperIMG>
 					<Image src={RecepIMG} alt='Logo' />
 				</WrapperIMG>
-				{/* <WrapperCircle1>
+				<WrapperCircle1>
 					<Image src={Circle1} alt='Logo' />
-				</WrapperCircle1> */}
+				</WrapperCircle1>
 				<Titles>
 					<Title>Beybars Dent-App</Title>
 					<DentAppName>Dent-App</DentAppName>
@@ -55,19 +55,16 @@ export default function Home() {
 				</Description>
 				<WrapperForm openForm={openForm}>
 					{openForm ? (
-						<Form setopeForm={setopeForm} />
+						<Form setopenForm={setopenForm} />
 					) : (
-						<OpenButton onClick={() => setopeForm(!openForm)}>
+						<OpenButton onClick={() => setopenForm(!openForm)}>
 							Заполнить форму
 						</OpenButton>
 					)}
 				</WrapperForm>
-				<motion.div
-					whileHover={{ scale: 1.2 }}
-					whileTap={{ scale: 1.1 }}
-					drag='x'
-					dragConstraints={{ left: -100, right: 100 }}
-				/>
+				<WrapperCircle2>
+					<Image src={Circle2} alt='Logo' />
+				</WrapperCircle2>
 			</BackgroundWrapper>
 		</MainLayout>
 	)
@@ -82,17 +79,15 @@ const BackgroundWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	position: relative;
 `
 
 const WrapperForm = styled.main`
-	position: fixed;
+	position: absolute;
 	bottom: -2px;
 	width: 100%;
+	z-index: 50;
 	height: ${({ openForm }) => (openForm ? '85vh' : '50px')};
-	/* background-color: #5790ff; */
 	background-color: #ffffff;
-
 	border-top-left-radius: ${({ openForm }) => (openForm ? '30px' : '30px')};
 	border-top-right-radius: ${({ openForm }) => (openForm ? '30px' : '30px')};
 	display: flex;
@@ -101,8 +96,9 @@ const WrapperForm = styled.main`
 `
 const TopRadius = styled.div`
 	position: absolute;
+	z-index: 2;
 	width: 100%;
-	height: 40px;
+	height: 20px;
 	background-color: #5790ff;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
@@ -118,10 +114,86 @@ const WrapperIMG = styled.div`
 	}
 `
 const WrapperCircle1 = styled.div`
-	position: absolute;
-	left: -250px;
-	transform: rotate(50deg) scale(1.2);
+	position: fixed;
+	top: -110px;
+	left: -140px;
+	z-index: 1;
+	-webkit-animation: rotating 8s linear infinite;
+	-moz-animation: rotating 8s linear infinite;
+	-ms-animation: rotating 8s linear infinite;
+	-o-animation: rotating 8s linear infinite;
+	animation: rotating 8s linear infinite;
+	@keyframes rotating {
+		from {
+			-ms-transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		to {
+			-ms-transform: rotate(360deg);
+			-moz-transform: rotate(360deg);
+			-webkit-transform: rotate(360deg);
+			-o-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+	@-webkit-keyframes {
+		from {
+			-webkit-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		to {
+			-webkit-transform: rotate(360deg);
+			-o-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
 `
+
+const WrapperCircle2 = styled.div`
+	position: fixed;
+	top: 50%;
+	/* left: 70%; */
+	right: -150px;
+	z-index: 1;
+	-webkit-animation: rotating 8s linear infinite;
+	-moz-animation: rotating 8s linear infinite;
+	-ms-animation: rotating 8s linear infinite;
+	-o-animation: rotating 8s linear infinite;
+	animation: rotating 8s linear infinite;
+	@keyframes rotating {
+		from {
+			-ms-transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		to {
+			-ms-transform: rotate(360deg);
+			-moz-transform: rotate(360deg);
+			-webkit-transform: rotate(360deg);
+			-o-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+	@-webkit-keyframes {
+		from {
+			-webkit-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		to {
+			-webkit-transform: rotate(360deg);
+			-o-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+`
+
 const Titles = styled.div`
 	width: 100%;
 	display: flex;
@@ -129,6 +201,8 @@ const Titles = styled.div`
 	align-items: center;
 	font-size: 1.5em;
 	margin-top: 10px;
+	position: relative;
+	z-index: 50;
 `
 const Title = styled.h2`
 	font-family: 'Plus Jakarta Sans';
@@ -137,6 +211,8 @@ const Title = styled.h2`
 	font-size: 1.3em;
 	line-height: 40px;
 	color: #5790ff;
+	position: relative;
+	z-index: 50;
 `
 const DentAppName = styled.p`
 	font-family: 'Plus Jakarta Sans';
@@ -144,6 +220,8 @@ const DentAppName = styled.p`
 	font-weight: 600;
 	font-size: 0.8em;
 	color: #000000;
+	position: relative;
+	z-index: 50;
 `
 const Description = styled.p`
 	padding: 0 15px;
@@ -155,6 +233,8 @@ const Description = styled.p`
 	color: #000000;
 	margin-bottom: 100px;
 	margin-top: 10px;
+	position: relative;
+	z-index: 50;
 `
 const OpenButton = styled.button`
 	background-color: #5790ff;
