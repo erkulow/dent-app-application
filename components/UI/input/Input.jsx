@@ -57,7 +57,7 @@ const StyledLable = styled.label`
 	font-family: 'Source Sans Pro';
 	font-size: 14px;
 	font-weight: 400;
-	color: #5790ff;
+	color: #5460e6;
 `
 
 const InputStyled = styled.input`
@@ -66,7 +66,7 @@ const InputStyled = styled.input`
 	padding: ${({ padding }) => padding || '10px'};
 	border-radius: ${({ borderRadius }) => borderRadius || '5px'};
 	letter-spacing: 0.6px;
-	color: #5790ff;
+	color: #5460e6;
 	font-weight: bold;
 	font-size: 16px;
 	font-weight: 400;
@@ -74,19 +74,23 @@ const InputStyled = styled.input`
 	font-family: 'Source Sans Pro';
 	transition: 0.2s;
 	background-color: ${({ background }) => background || '#ffffff'};
-	border: ${({ border }) => border || '1px solid #5790ff'};
+	border: ${({ border }) => border || '1px solid #5460e6'};
 	::placeholder {
 		color: #d0d2d3;
 	}
 	:active {
 		border: ${({ active }) =>
-			active ? '1px solid #5790ff !important' : ''};
+			active ? '1px solid #5460e6 !important' : ''};
 	}
 	/* :focus {
-		-webkit-box-shadow: 0px 0px 1px 1px #5790ff;
-		-moz-box-shadow: 0px 0px 1px 1px #5790ff;
-		box-shadow: 0px 0px 1px 1px #5790ff;
+		-webkit-box-shadow: 0px 0px 1px 1px #5460e6;
+		-moz-box-shadow: 0px 0px 1px 1px #5460e6;
+		box-shadow: 0px 0px 1px 1px #5460e6;
 	} */
+	&[type='date']::-webkit-calendar-picker-indicator {
+		filter: invert(50%) sepia(74%) saturate(6290%) hue-rotate(226deg)
+			brightness(95%) contrast(89%);
+	}
 	:disabled,
 	:disabled:hover {
 		opacity: ${({ notDisabled }) => (notDisabled ? '1' : '0.5')};
@@ -104,7 +108,7 @@ const InputStyledSelect = styled.select`
 	padding: 0.7em 0.8em;
 	border-radius: 7px;
 	letter-spacing: 0.6px;
-	color: #5790ff;
+	color: #5460e6;
 	font-weight: bold;
 	font-family: 'Source Sans Pro';
 	font-size: 16px;
@@ -112,7 +116,7 @@ const InputStyledSelect = styled.select`
 	outline: none;
 	transition: 0.2s;
 	background-color: #ffffff;
-	border: 1px solid #5790ff;
+	border: 1px solid #5460e6;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -121,10 +125,10 @@ const InputStyledSelect = styled.select`
 		color: #d0d2d3;
 	}
 	:active {
-		border: 1px solid #5790ff;
+		border: 1px solid #5460e6;
 	}
 	:focus {
-		border: 1px solid #5790ff;
+		border: 1px solid #5460e6;
 	}
 	:disabled,
 	:disabled:hover {

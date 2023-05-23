@@ -13,7 +13,7 @@ const MainLayout = ({ headContext, children }) => {
 						name={name || ''}
 						content={content || ''}
 						property={property || ''}
-						key={key || ''}
+						key={name || ''}
 					/>
 				))}
 				{link.map(({ rel, href }) => (
@@ -27,7 +27,7 @@ const MainLayout = ({ headContext, children }) => {
 
 const Container = styled.div`
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

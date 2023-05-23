@@ -9,6 +9,7 @@ import Button from '../UI/button'
 export const Form = ({ setopenForm }) => {
 	const [name, setName] = useState('')
 	const [number, setNumber] = useState('')
+	const [date, setDate] = useState('')
 	const [doctor, setDoctor] = useState('')
 	const [cheduleTime, setCheduleTime] = useState('')
 
@@ -23,13 +24,21 @@ export const Form = ({ setopenForm }) => {
 		setCheduleTime(value)
 	}
 
-	const sendFormHandler = () => {
+	const sendFormHandler = (event) => {
+		event.preventDefault()
 		console.log({
 			name: name,
 			number: number,
+			date: date,
 			doctor: doctor,
 			cheduleTime: cheduleTime,
 		})
+		setopenForm(false)
+		setName('')
+		setNumber('')
+		setDoctor('')
+		setCheduleTime('')
+		setDate('')
 	}
 
 	const closeFormHandler = () => {
@@ -38,6 +47,7 @@ export const Form = ({ setopenForm }) => {
 		setNumber('')
 		setDoctor('')
 		setCheduleTime('')
+		setDate('')
 	}
 
 	const doctors = [
@@ -69,10 +79,34 @@ export const Form = ({ setopenForm }) => {
 			startTime: '09:00',
 			endTime: '17:00',
 		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
+		{
+			startTime: '09:00',
+			endTime: '17:00',
+		},
 	]
 	return (
 		<AppForm>
-			<h1>Заплоните форму</h1>
+			<h2>Заплоните форму</h2>
 			<WrapperForm>
 				<Input
 					label='Имя *'
@@ -92,7 +126,32 @@ export const Form = ({ setopenForm }) => {
 					value={doctor}
 					onChange={(e) => setDoctor(e.target.value)}
 				/>
-				{cheduleTime.length === 0 ? (
+				<Input
+					label='Доктор'
+					type='date'
+					value={date}
+					onChange={(e) => setDate(e.target.value)}
+				/>
+				<StyledSchedule>
+					{dataTime?.map((item, index) => (
+						<Shulde
+							key={index}
+							style={{
+								backgroundColor:
+									dataTime === item.startTime && '#06b5d4',
+								color: dataTime === item.startTime && 'white',
+							}}
+							onClick={(e) =>
+								setCheduleTimeHandler(e.target.textContent)
+							}
+						>
+							<>{item.startTime}</>
+							<> - </>
+							<>{item.endTime}</>
+						</Shulde>
+					))}
+				</StyledSchedule>
+				{/* {cheduleTime.length === 0 ? (
 					doctor !== '' ? (
 						doctor === '-' ? (
 							<StyledErrorMessage>
@@ -110,9 +169,9 @@ export const Form = ({ setopenForm }) => {
 					)
 				) : (
 					<StyledSchedule>
-						{dataTime?.map((item) => (
+						{dataTime?.map((item, index) => (
 							<Shulde
-								key={item.startTime}
+								key={index}
 								style={{
 									backgroundColor:
 										dataTime === item.startTime &&
@@ -130,28 +189,36 @@ export const Form = ({ setopenForm }) => {
 							</Shulde>
 						))}
 					</StyledSchedule>
-				)}
-				<Button onClick={() => sendFormHandler()}>Записаться</Button>
+				)} */}
+				<Button
+					margin='0 0 30px 0'
+					type='submit'
+					onClick={(e) => sendFormHandler(e)}
+				>
+					Записаться
+				</Button>
 			</WrapperForm>
-			<WrapperArrow onClick={() => closeFormHandler(false)}>
+			{/* <WrapperArrow onClick={() => closeFormHandler(false)}>
 				<Image src={DownArrow} alt='Down' />
-			</WrapperArrow>
+			</WrapperArrow> */}
 		</AppForm>
 	)
 }
 
 const AppForm = styled.form`
 	width: 100%;
-	padding: 10px;
+	padding: 0 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	h1 {
+	min-height: 500px;
+
+	h2 {
 		font-family: 'Source Sans Pro';
 		font-style: normal;
 		font-weight: 600;
 		line-height: 40px;
-		color: #5790ff;
+		color: #5460e6;
 		text-align: center;
 		margin-bottom: 10px;
 	}
@@ -166,7 +233,7 @@ const WrapperForm = styled.div`
 const WrapperArrow = styled.div`
 	width: 100px;
 	border-radius: 30px;
-	border: 1px solid #5790ff;
+	border: 1px solid #5460e6;
 	padding: 5px;
 	display: flex;
 	justify-content: center;

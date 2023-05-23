@@ -24,7 +24,7 @@ const InputMaskNumber = (props) => {
 					border: 'none',
 					width: '100%',
 					height: '30px',
-					color: '#5790ff',
+					color: '#5460e6',
 				}}
 				defaultMask={'kg'}
 				buttonStyle={{
@@ -39,7 +39,7 @@ const StyledLable = styled.label`
 	font-family: 'Source Sans Pro';
 	font-size: 14px;
 	font-weight: 400;
-	color: #5790ff;
+	color: #5460e6;
 `
 const InputStyled = styled(PhoneInput)`
 	width: 100%;
@@ -49,7 +49,7 @@ const InputStyled = styled(PhoneInput)`
 	padding: ${({ padding }) => padding || '5px'};
 	border-radius: ${({ borderRadius }) => borderRadius || '5px'};
 	letter-spacing: 0.6px;
-	color: #5790ff !important;
+	color: #5460e6 !important;
 	font-weight: bold;
 	font-size: 16px;
 	font-weight: 400;
@@ -57,15 +57,15 @@ const InputStyled = styled(PhoneInput)`
 	transition: 0.2s;
 	background-color: ${({ background }) => background || '#ffffff'};
 	border: ${({ validation }) =>
-		validation ? '1px solid red' : '1px solid #5790ff'};
+		validation ? '1px solid red' : '1px solid #5460e6'};
 	::placeholder {
 		color: #d0d2d3;
 	}
 	:active {
-		border: 1px solid #5790ff;
+		border: 1px solid #5460e6;
 	}
 	:focus {
-		border: 1px solid #5790ff;
+		border: 1px solid #5460e6;
 	}
 	:disabled,
 	:disabled:hover {

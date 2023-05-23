@@ -7,7 +7,7 @@ const Button = (props) => {
 const StyledButton = styled.button`
 	width: ${({ width }) => width || '100%'};
 	height: 42px;
-	background-color: ${({ backgroundColor }) => backgroundColor || '#5790ff'};
+	background-color: ${({ backgroundColor }) => backgroundColor || '#5460e6'};
 	border-radius: ${({ borderRadius }) => borderRadius || '4px'};
 	padding: ${({ padding }) => padding || '8px 18px'};
 	border: ${({ border }) => border || 'none'};

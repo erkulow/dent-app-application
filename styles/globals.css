@@ -10,3 +10,6 @@
 body::-webkit-scrollbar {
 	display: none;
 }
+html {
+	background-color: #f6ebe5;
+}
